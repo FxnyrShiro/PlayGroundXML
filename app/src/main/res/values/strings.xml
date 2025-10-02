@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name" translatable="false">topPlaygroundXML</string>
+    <string name="hello_world">Привет мир!</string>
+</resources>
