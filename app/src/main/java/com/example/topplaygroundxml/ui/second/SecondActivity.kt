@@ -2,16 +2,16 @@ package com.example.topplaygroundxml.ui.second
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.topplaygroundxml.databinding.ActivitySecondBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SecondActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivitySecondBinding
-    private val viewModel: SecondViewModel by viewModels()
+    private val viewModel: SecondViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
