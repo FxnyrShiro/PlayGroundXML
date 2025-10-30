@@ -8,4 +8,10 @@
     <string name="temperature_detail_template">Max: %1$.1f°C / Min: %2$.1f°C</string>
     <string name="hello_world">Hello World!</string>
     <string name="calculator_screen_title">Calculator</string>
+
+    <!-- Bottom Nav Titles -->
+    <string name="title_weather">Weather</string>
+    <string name="title_calculator">Calculator</string>
+    <string name="title_list">List</string>
+
 </resources>

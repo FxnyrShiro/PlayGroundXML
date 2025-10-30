@@ -1,5 +1,9 @@
 package com.example.topplaygroundxml.di
 
+import androidx.room.Room
+import com.example.topplaygroundxml.features.auth.data.local.database.AppDatabase
+import com.example.topplaygroundxml.features.auth.data.repository.AuthRepositoryImpl
+import com.example.topplaygroundxml.features.auth.domain.repository.AuthRepository
 import com.example.topplaygroundxml.features.calculator.domain.repository.CalculationRepository
 import com.example.topplaygroundxml.features.weather.data.remote.WeatherApi
 import com.example.topplaygroundxml.features.weather.domain.repository.WeatherRepository
@@ -9,10 +13,24 @@ import net.objecthunter.exp4j.ExpressionBuilder
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val dataModule = module {
+
+    // Database (Room)
+    single {
+        Room.databaseBuilder(
+            androidContext(),
+            AppDatabase::class.java,
+            "app_database"
+        ).build()
+    }
+
+    single {
+        get<AppDatabase>().userDao()
+    }
 
     // Network
     single {
@@ -50,5 +68,9 @@ val dataModule = module {
                 return ExpressionBuilder(expression).build().evaluate()
             }
         }
+    }
+    
+    single<AuthRepository> {
+        AuthRepositoryImpl(get())
     }
 }
