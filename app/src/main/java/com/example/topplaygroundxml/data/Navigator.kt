@@ -2,10 +2,11 @@ package com.example.topplaygroundxml.data
 
 import android.content.Context
 import android.content.Intent
-import com.example.topplaygroundxml.data.model.DailyData
-import com.example.topplaygroundxml.ui.second.SecondActivity
-import com.example.topplaygroundxml.ui.weather.WeatherActivity
-import com.example.topplaygroundxml.ui.weather.detail.WeatherDetailActivity
+import com.example.topplaygroundxml.features.calculator.presentation.ui.CalculatorActivity
+import com.example.topplaygroundxml.features.second.presentation.ui.SecondActivity
+import com.example.topplaygroundxml.features.weather.domain.model.DailyData
+import com.example.topplaygroundxml.features.weather.presentation.ui.WeatherActivity
+import com.example.topplaygroundxml.features.weather.presentation.ui.WeatherDetailActivity
 
 class Navigator {
 
@@ -15,6 +16,10 @@ class Navigator {
 
     fun getWeatherActivityIntent(context: Context): Intent {
         return Intent(context, WeatherActivity::class.java)
+    }
+
+    fun getCalculatorActivityIntent(context: Context): Intent {
+        return Intent(context, CalculatorActivity::class.java)
     }
 
     fun getWeatherDetailActivityIntent(context: Context, dailyData: DailyData, dayIndex: Int): Intent {

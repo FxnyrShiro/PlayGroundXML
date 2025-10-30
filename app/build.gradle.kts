@@ -66,4 +66,7 @@ dependencies {
 
     // Coil
     implementation(libs.coil.kt)
+
+    // Exp4j
+    implementation(libs.exp4j)
 }
