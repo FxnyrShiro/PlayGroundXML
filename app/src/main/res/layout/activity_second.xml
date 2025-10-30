@@ -9,7 +9,7 @@
         android:id="@+id/view"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:background="@color/any"
+        android:background="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
         android:id="@+id/view2"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:background="@color/any"
+        android:background="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/view1"
         app:layout_constraintTop_toTopOf="parent" />

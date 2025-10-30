@@ -2,5 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="any">#FF3ED1C7</color>
+
+    <color name="cold_weather_bg">#81D4FA</color> <!-- Light Blue -->
+    <color name="mild_weather_bg">#A5D6A7</color> <!-- Light Green -->
+    <color name="warm_weather_bg">#FFD54F</color> <!-- Amber -->
+    <color name="hot_weather_bg">#FF8A65</color> <!-- Light Orange -->
+
+    <color name="toolbar_color">#FFFFFF</color>
 </resources>

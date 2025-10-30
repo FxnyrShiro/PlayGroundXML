@@ -33,5 +33,10 @@ class MainActivity : AppCompatActivity() {
             val intent = navigator.getSecondActivityIntent(this)
             startActivity(intent)
         }
+
+        binding.weatherButton.setOnClickListener {
+            val intent = navigator.getWeatherActivityIntent(this)
+            startActivity(intent)
+        }
     }
 }

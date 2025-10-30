@@ -1,4 +1,10 @@
 <resources>
-    <string name="app_name" translatable="false">topPlaygroundXML</string>
-    <string name="hello_world">Привет мир!</string>
+    <string name="app_name">topPlaygroundXML</string>
+    <string name="weather_screen_title">Weather Forecast</string>
+    <string name="city_name">Moscow, Russia</string>
+    <string name="weather_button_text">Open Weather</string>
+    <string name="temperature_template">%1$.1f°C / %2$.1f°C</string>
+    <string name="precipitation_template">Precipitation: %1$.1f mm</string>
+    <string name="temperature_detail_template">Max: %1$.1f°C / Min: %2$.1f°C</string>
+    <string name="hello_world">Hello World!</string>
 </resources>
