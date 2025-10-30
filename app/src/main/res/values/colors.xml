@@ -9,4 +9,9 @@
     <color name="hot_weather_bg">#FF8A65</color> <!-- Light Orange -->
 
     <color name="toolbar_color">#FFFFFF</color>
+
+    <!-- Calculator Button Colors -->
+    <color name="calculator_operator_bg">#42A5F5</color> <!-- Blue 400 -->
+    <color name="calculator_equals_bg">#66BB6A</color> <!-- Green 400 -->
+    <color name="calculator_clear_bg">#EF5350</color>   <!-- Red 400 -->
 </resources>

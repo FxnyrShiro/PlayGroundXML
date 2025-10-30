@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TopPlaygroundXML">
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".features.main.presentation.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,9 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.second.SecondActivity"/>
-        <activity android:name=".ui.weather.WeatherActivity"/>
-        <activity android:name=".ui.weather.detail.WeatherDetailActivity"/>
+        <activity android:name=".features.second.presentation.ui.SecondActivity"/>
+        <activity android:name=".features.weather.presentation.ui.WeatherActivity"/>
+        <activity android:name=".features.weather.presentation.ui.WeatherDetailActivity"/>
+        <activity android:name=".features.calculator.presentation.ui.CalculatorActivity"/>
     </application>
 
 </manifest>
