@@ -1,0 +1,10 @@
+package com.example.musicapp.data.network
+
+import com.example.musicapp.data.network.dto.SearchResponseDto
+import retrofit2.http.GET
+import retrofit2.http.Query
+
+interface ApiService {
+    @GET("search")
+    suspend fun searchTracks(@Query("q") query: String): SearchResponseDto
+}
