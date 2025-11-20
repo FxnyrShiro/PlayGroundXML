@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface TrackRepository {
     suspend fun searchTracks(query: String): List<TrackDto>
+    suspend fun getTrack(trackId: Long): TrackDto
     fun getFavoriteTracks(): Flow<List<TrackEntity>>
     suspend fun addTrackToFavorites(track: TrackEntity)
     suspend fun removeTrackFromFavorites(trackId: Long)

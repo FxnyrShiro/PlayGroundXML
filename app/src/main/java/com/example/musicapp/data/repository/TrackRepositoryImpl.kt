@@ -16,6 +16,10 @@ class TrackRepositoryImpl(
         return apiService.searchTracks(query).data
     }
 
+    override suspend fun getTrack(trackId: Long): TrackDto {
+        return apiService.getTrack(trackId)
+    }
+
     override fun getFavoriteTracks(): Flow<List<TrackEntity>> {
         return trackDao.getAllTracks()
     }

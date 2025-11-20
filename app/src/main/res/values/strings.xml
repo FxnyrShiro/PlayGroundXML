@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name" translatable="false">topPlaygroundXML</string>
     <string name="hello_world">Привет мир!</string>
+
+    <!-- Track Detail Screen -->
+    <string name="track_details_title">Track Details</string>
+    <string name="back_button_desc">Back</string>
+    <string name="album_cover_desc">Album Cover</string>
+    <string name="unknown_artist">Unknown Artist</string>
+    <string name="details_duration">Duration</string>
+    <string name="details_release_date">Released</string>
+    <string name="details_album">Album</string>
+    <string name="details_explicit">Explicit</string>
+
 </resources>

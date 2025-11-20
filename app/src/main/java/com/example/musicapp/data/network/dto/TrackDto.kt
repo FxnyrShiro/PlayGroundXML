@@ -9,5 +9,8 @@ data class TrackDto(
     @SerialName("title") val title: String,
     @SerialName("preview") val preview: String? = null,
     @SerialName("artist") val artist: ArtistDto? = null,
-    @SerialName("album") val album: AlbumDto? = null
+    @SerialName("album") val album: AlbumDto? = null,
+    @SerialName("release_date") val releaseDate: String? = null,
+    @SerialName("duration") val duration: Int? = null,
+    @SerialName("explicit_lyrics") val explicitLyrics: Boolean? = null
 )

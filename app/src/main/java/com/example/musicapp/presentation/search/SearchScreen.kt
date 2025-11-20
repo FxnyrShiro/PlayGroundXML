@@ -1,5 +1,6 @@
 package com.example.musicapp.presentation.search
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,11 +22,13 @@ import com.example.musicapp.data.network.dto.TrackDto
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SearchScreen(viewModel: SearchViewModel = koinViewModel()) {
+fun SearchScreen(
+    viewModel: SearchViewModel = koinViewModel(),
+    onTrackClick: (Long) -> Unit
+) {
     val searchQuery by viewModel.searchQuery.collectAsState()
     val uiState by viewModel.uiState.collectAsState()
-    val favoriteTrackIds by viewModel.favoriteTrackIds.collectAsState()
-
+    
     Scaffold(
         topBar = {
             OutlinedTextField(
@@ -46,33 +49,59 @@ fun SearchScreen(viewModel: SearchViewModel = koinViewModel()) {
     ) { padding ->
         Box(modifier = Modifier.padding(padding)) {
             when (val state = uiState) {
-                is SearchUiState.Idle -> {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text(text = "Start your search")
-                    }
-                }
-                is SearchUiState.Loading -> {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        CircularProgressIndicator()
-                    }
-                }
+                is SearchUiState.Idle -> IdleState()
+                is SearchUiState.Loading -> LoadingState()
                 is SearchUiState.Success -> {
-                    LazyColumn(modifier = Modifier.fillMaxSize()) {
-                        items(state.tracks) { track ->
-                            TrackListItem(
-                                track = track,
-                                isFavorite = favoriteTrackIds.contains(track.id),
-                                onFavoriteClick = { viewModel.toggleFavorite(track) }
-                            )
-                        }
-                    }
+                    val favoriteTrackIds by viewModel.favoriteTrackIds.collectAsState()
+                    TrackList(
+                        tracks = state.tracks,
+                        favoriteTrackIds = favoriteTrackIds,
+                        onFavoriteClick = viewModel::toggleFavorite,
+                        onTrackClick = onTrackClick
+                    )
                 }
-                is SearchUiState.Error -> {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text(text = state.message, color = MaterialTheme.colorScheme.error)
-                    }
-                }
+                is SearchUiState.Error -> ErrorState(message = state.message)
             }
+        }
+    }
+}
+
+@Composable
+private fun IdleState() {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Text(text = "Start your search")
+    }
+}
+
+@Composable
+private fun LoadingState() {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        CircularProgressIndicator()
+    }
+}
+
+@Composable
+private fun ErrorState(message: String) {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Text(text = message, color = MaterialTheme.colorScheme.error)
+    }
+}
+
+@Composable
+private fun TrackList(
+    tracks: List<TrackDto>,
+    favoriteTrackIds: Set<Long>,
+    onFavoriteClick: (TrackDto) -> Unit,
+    onTrackClick: (Long) -> Unit
+) {
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
+        items(tracks) { track ->
+            TrackListItem(
+                track = track,
+                isFavorite = favoriteTrackIds.contains(track.id),
+                onFavoriteClick = { onFavoriteClick(track) },
+                onItemClick = { onTrackClick(track.id) }
+            )
         }
     }
 }
@@ -81,12 +110,14 @@ fun SearchScreen(viewModel: SearchViewModel = koinViewModel()) {
 fun TrackListItem(
     track: TrackDto,
     isFavorite: Boolean,
-    onFavoriteClick: () -> Unit
+    onFavoriteClick: () -> Unit,
+    onItemClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 4.dp)
+            .clickable(onClick = onItemClick)
     ) {
         Row(
             modifier = Modifier.padding(8.dp),

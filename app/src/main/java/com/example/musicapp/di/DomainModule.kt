@@ -9,4 +9,5 @@ val domainModule = module {
     factory { AddTrackToFavoritesUseCase(get()) }
     factory { RemoveTrackFromFavoritesUseCase(get()) }
     factory { IsTrackFavoriteUseCase(get()) }
+    factory { GetTrackDetailUseCase(get()) }
 }
