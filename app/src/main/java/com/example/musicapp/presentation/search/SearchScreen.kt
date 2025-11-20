@@ -15,9 +15,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.musicapp.R
 import com.example.musicapp.data.network.dto.TrackDto
 import org.koin.androidx.compose.koinViewModel
 
@@ -34,14 +36,14 @@ fun SearchScreen(
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = viewModel::onSearchQueryChange,
-                label = { Text("Search for a track...") },
+                label = { Text(stringResource(id = R.string.search_placeholder)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
                 singleLine = true,
                 trailingIcon = {
                     IconButton(onClick = { viewModel.searchTracks() }) {
-                        Icon(imageVector = Icons.Default.Search, contentDescription = "Search")
+                        Icon(imageVector = Icons.Default.Search, contentDescription = stringResource(id = R.string.search_icon_desc))
                     }
                 }
             )
@@ -69,7 +71,7 @@ fun SearchScreen(
 @Composable
 private fun IdleState() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Start your search")
+        Text(text = stringResource(id = R.string.search_idle_text))
     }
 }
 
@@ -125,7 +127,7 @@ fun TrackListItem(
         ) {
             AsyncImage(
                 model = track.album?.coverMedium,
-                contentDescription = "Album Cover",
+                contentDescription = stringResource(id = R.string.album_cover_desc),
                 modifier = Modifier.size(60.dp),
                 contentScale = ContentScale.Crop
             )
@@ -141,7 +143,7 @@ fun TrackListItem(
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = track.artist?.name ?: "Unknown Artist",
+                    text = track.artist?.name ?: stringResource(id = R.string.unknown_artist),
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -150,7 +152,7 @@ fun TrackListItem(
             IconButton(onClick = onFavoriteClick) {
                 Icon(
                     imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-                    contentDescription = "Toggle Favorite",
+                    contentDescription = stringResource(id = R.string.toggle_favorite_desc),
                     tint = if (isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
                 )
             }
