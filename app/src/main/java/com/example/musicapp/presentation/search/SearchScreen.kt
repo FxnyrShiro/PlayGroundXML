@@ -18,10 +18,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.musicapp.R
+import com.example.musicapp.domain.model.Album
+import com.example.musicapp.domain.model.Artist
 import com.example.musicapp.domain.model.Track
+import com.example.musicapp.ui.theme.MusicAppTheme
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -164,5 +168,74 @@ fun TrackListItem(
                 tint = if (isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
+    }
+}
+
+
+// --- Previews ---
+
+private val previewTrack = Track(
+    id = 1,
+    title = "Stairway to Heaven",
+    preview = "",
+    artist = Artist(0, "Led Zeppelin", null, null),
+    album = Album(
+        id = 0, 
+        title = "Led Zeppelin IV", 
+        cover = "", 
+        coverMedium = "https://e-cdns-images.dzcdn.net/images/cover/2e018122cb56986277102d2041a592c8/250x250-000000-80-0-0.jpg"
+    ),
+    releaseDate = "1971-11-08",
+    duration = 482,
+    explicitLyrics = false
+)
+
+@Preview(name = "Track Item", showBackground = true)
+@Composable
+private fun TrackListItemPreview() {
+    MusicAppTheme {
+        TrackListItem(
+            track = previewTrack,
+            isFavorite = false,
+            onFavoriteClick = {},
+            onItemClick = {}
+        )
+    }
+}
+
+@Preview(name = "Track Item (Favorite)", showBackground = true)
+@Composable
+private fun TrackListItemFavoritePreview() {
+    MusicAppTheme {
+        TrackListItem(
+            track = previewTrack,
+            isFavorite = true,
+            onFavoriteClick = {},
+            onItemClick = {}
+        )
+    }
+}
+
+@Preview(name = "Idle State", showBackground = true)
+@Composable
+private fun IdleStatePreview() {
+    MusicAppTheme {
+        IdleState()
+    }
+}
+
+@Preview(name = "Loading State", showBackground = true)
+@Composable
+private fun LoadingStatePreview() {
+    MusicAppTheme {
+        LoadingState()
+    }
+}
+
+@Preview(name = "Error State", showBackground = true)
+@Composable
+private fun ErrorStatePreview() {
+    MusicAppTheme {
+        ErrorState(message = "Failed to load tracks. Please try again.")
     }
 }

@@ -17,10 +17,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.musicapp.R
+import com.example.musicapp.domain.model.Album
+import com.example.musicapp.domain.model.Artist
 import com.example.musicapp.domain.model.Track
+import com.example.musicapp.ui.theme.MusicAppTheme
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -37,7 +41,6 @@ fun TrackDetailScreen(
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
             is TrackDetailUiState.Success -> {
-                // Background with gradient
                 Box(modifier = Modifier.fillMaxSize()) {
                     AsyncImage(
                         model = state.track.album?.coverMedium,
@@ -60,12 +63,10 @@ fun TrackDetailScreen(
                             )
                     )
                 }
-                // Main content
                 TrackDetails(track = state.track)
 
-                // Top bar on top of everything
                 TopAppBar(
-                    title = { }, // No title for a cleaner look
+                    title = { },
                     navigationIcon = {
                         IconButton(onClick = onBackClick) {
                             Icon(
@@ -87,7 +88,6 @@ fun TrackDetailScreen(
                         color = MaterialTheme.colorScheme.error
                     )
                 }
-                // Also add a back button here for usability
                 TopAppBar(
                     title = { },
                     navigationIcon = {
@@ -147,7 +147,6 @@ private fun TrackDetails(track: Track) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Additional track details
         Column(modifier = Modifier.fillMaxWidth()) {
             track.duration?.let {
                 DetailRow(label = stringResource(id = R.string.details_duration), value = formatDuration(it))
@@ -171,7 +170,6 @@ private fun DetailRow(label: String, value: String) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -179,6 +177,7 @@ private fun DetailRow(label: String, value: String) {
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
+        Spacer(Modifier.weight(1f))
         Text(
             text = value,
             style = MaterialTheme.typography.bodyLarge,
@@ -191,4 +190,30 @@ private fun formatDuration(seconds: Int): String {
     val minutes = seconds / 60
     val remainingSeconds = seconds % 60
     return String.format("%d:%02d", minutes, remainingSeconds)
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun TrackDetailsPreview() {
+    MusicAppTheme {
+        Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
+            TrackDetails(
+                track = Track(
+                    id = 1,
+                    title = "Bohemian Rhapsody",
+                    preview = "",
+                    artist = Artist(0, "Queen", null, null),
+                    album = Album(
+                        id = 0,
+                        title = "A Night at the Opera",
+                        cover = "https://e-cdns-images.dzcdn.net/images/cover/2e018122cb56986277102d2041a592c8/250x250-000000-80-0-0.jpg",
+                        coverMedium = "https://e-cdns-images.dzcdn.net/images/cover/2e018122cb56986277102d2041a592c8/500x500-000000-80-0-0.jpg"
+                    ),
+                    releaseDate = "1975-10-31",
+                    duration = 354,
+                    explicitLyrics = false
+                )
+            )
+        }
+    }
 }

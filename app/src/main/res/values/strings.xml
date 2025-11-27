@@ -1,26 +1,28 @@
 <resources>
-    <string name="app_name" translatable="false">topPlaygroundXML</string>
-    <string name="hello_world">Привет мир!</string>
+    <string name="app_name" translatable="false">MusicApp</string>
 
-    <!-- Track Detail Screen -->
-    <string name="track_details_title">Track Details</string>
-    <string name="back_button_desc">Back</string>
-    <string name="album_cover_desc">Album Cover</string>
-    <string name="unknown_artist">Unknown Artist</string>
-    <string name="details_duration">Duration</string>
-    <string name="details_release_date">Released</string>
-    <string name="details_album">Album</string>
-    <string name="details_explicit">Explicit</string>
-    <string name="share_button_desc">Share Track</string>
+    <!-- Общие -->
+    <string name="hello_world">Привет, мир!</string>
+    <string name="unknown_artist">Неизвестный исполнитель</string>
 
-    <!-- Search Screen -->
-    <string name="search_placeholder">Search for a track...</string>
-    <string name="search_icon_desc">Search</string>
-    <string name="search_idle_text">Start your search</string>
-    <string name="toggle_favorite_desc">Toggle Favorite</string>
+    <!-- Экран деталей трека -->
+    <string name="track_details_title">Детали трека</string>
+    <string name="back_button_desc">Назад</string>
+    <string name="album_cover_desc">Обложка альбома</string>
+    <string name="details_duration">Длительность</string>
+    <string name="details_release_date">Дата выхода</string>
+    <string name="details_album">Альбом</string>
+    <string name="details_explicit">Для взрослых</string>
+    <string name="share_button_desc">Поделиться треком</string>
 
-    <!-- Favorites Screen -->
-    <string name="favorites_title">Favorites</string>
-    <string name="favorites_empty_state">"You haven't added any tracks to favorites yet."</string>
+    <!-- Экран поиска -->
+    <string name="search_placeholder">Поиск трека...</string>
+    <string name="search_icon_desc">Поиск</string>
+    <string name="search_idle_text">Начните поиск, чтобы увидеть результаты</string>
+    <string name="toggle_favorite_desc">Добавить или убрать из избранного</string>
+
+    <!-- Экран избранного -->
+    <string name="favorites_title">Избранное</string>
+    <string name="favorites_empty_state">"Вы еще не добавили ни одного трека в избранное."</string>
 
 </resources>
