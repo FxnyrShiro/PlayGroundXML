@@ -1,7 +1,10 @@
 package com.example.musicapp.domain.usecase
 
+import com.example.musicapp.domain.model.Track
 import com.example.musicapp.domain.repository.TrackRepository
 
-class GetTrackDetailUseCase(private val repository: TrackRepository) {
-    suspend operator fun invoke(trackId: Long) = repository.getTrack(trackId)
+class GetTrackDetailUseCase(private val trackRepository: TrackRepository) {
+    suspend operator fun invoke(trackId: Long): Track {
+        return trackRepository.getTrack(trackId)
+    }
 }

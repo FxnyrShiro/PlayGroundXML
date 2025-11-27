@@ -2,6 +2,7 @@ package com.example.musicapp.presentation.favorites
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,10 +13,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.example.musicapp.data.database.entity.TrackEntity
-import com.example.musicapp.data.network.dto.AlbumDto
-import com.example.musicapp.data.network.dto.ArtistDto
-import com.example.musicapp.data.network.dto.TrackDto
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import com.example.musicapp.R
+import com.example.musicapp.domain.model.Track
 import com.example.musicapp.presentation.search.TrackListItem
 import org.koin.androidx.compose.koinViewModel
 
@@ -28,8 +29,14 @@ fun FavoritesScreen(
     val favoriteTracks by viewModel.favoriteTracks.collectAsState()
 
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
-            TopAppBar(title = { Text("Favorite Tracks") })
+            TopAppBar(
+                title = { Text(stringResource(id = R.string.favorites_title)) },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background
+                )
+            )
         }
     ) { padding ->
         Column(modifier = Modifier.padding(padding)) {
@@ -52,35 +59,31 @@ private fun EmptyState() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "You haven\'t added any tracks to favorites yet.")
+        Text(
+            text = stringResource(id = R.string.favorites_empty_state),
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
     }
 }
 
 @Composable
 private fun FavoritesList(
-    tracks: List<TrackEntity>,
+    tracks: List<Track>,
     onRemoveClick: (Long) -> Unit,
     onTrackClick: (Long) -> Unit
 ) {
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(tracks) { trackEntity ->
-            val trackDto = trackEntity.toDto()
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(horizontal = 8.dp)
+    ) {
+        items(tracks, key = { it.id }) { track ->
             TrackListItem(
-                track = trackDto,
+                track = track,
                 isFavorite = true, // All tracks here are favorites
-                onFavoriteClick = { onRemoveClick(trackEntity.id) },
-                onItemClick = { onTrackClick(trackEntity.id) }
+                onFavoriteClick = { onRemoveClick(track.id) },
+                onItemClick = { onTrackClick(track.id) }
             )
         }
     }
-}
-
-private fun TrackEntity.toDto(): TrackDto {
-    return TrackDto(
-        id = this.id,
-        title = this.title,
-        artist = ArtistDto(id = 0, name = this.artistName),
-        album = AlbumDto(id = 0, title = this.albumTitle, coverMedium = this.albumCover),
-        preview = this.previewUrl
-    )
 }

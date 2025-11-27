@@ -2,7 +2,7 @@ package com.example.musicapp.presentation.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.musicapp.data.network.dto.TrackDto
+import com.example.musicapp.domain.model.Track
 import com.example.musicapp.domain.usecase.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 sealed interface SearchUiState {
     object Idle : SearchUiState
     object Loading : SearchUiState
-    data class Success(val tracks: List<TrackDto>) : SearchUiState
+    data class Success(val tracks: List<Track>) : SearchUiState
     data class Error(val message: String) : SearchUiState
 }
 
@@ -66,7 +66,7 @@ class SearchViewModel(
         }
     }
 
-    fun toggleFavorite(track: TrackDto) {
+    fun toggleFavorite(track: Track) {
         viewModelScope.launch {
             if (favoriteTrackIds.value.contains(track.id)) {
                 removeTrackFromFavoritesUseCase(track.id)

@@ -1,28 +1,54 @@
 # MusicApp
 
-A simple music search application built with modern Android development tools.
+A modern, reactive music search application built with the latest Android development tools. This app allows users to search for tracks, view details, and manage a local list of favorite songs.
 
 ## Features
 
-*   **Search for tracks:** Find your favorite music by searching for a track title.
-*   **View track details:** Click on a track to see more details, including a larger album cover.
-*   **Favorites:** Add and remove tracks from your personal favorites list.
-*   **Persistent Favorites:** Your favorite tracks are saved locally on your device.
+*   **Dynamic Track Search:** Find your favorite music with a search that reacts as you type.
+*   **Detailed Track View:** Get more information about a track, including a larger album cover, duration, and release date.
+*   **Favorites Management:** Add and remove tracks from a personal favorites list.
+*   **Persistent Storage:** Your favorite tracks are saved locally using a Room database, ensuring they are available even after the app is closed.
+*   **Clean, Responsive UI:** A user interface built entirely with Jetpack Compose, featuring clear loading, error, and content states.
 
 ## Architecture
 
-The application follows the principles of **Clean Architecture**. The code is divided into three main layers:
+The application is built upon the principles of **Clean Architecture** to ensure a scalable, maintainable, and testable codebase. The project is separated into three distinct layers:
 
-*   **Presentation:** The UI layer, built with **Jetpack Compose**. It uses **MVVM (Model-View-ViewModel)** to separate UI logic from business logic.
-*   **Domain:** This layer contains the core business logic of the application, encapsulated in **UseCases**.
-*   **Data:** This layer is responsible for providing data to the application. It includes a **Repository** that fetches data from both a remote **(Retrofit)** and a local **(Room)** data source.
+*   **Presentation (UI Layer):**
+    *   Built entirely with **Jetpack Compose**.
+    *   Follows the **MVVM (Model-View-ViewModel)** pattern.
+    *   `ViewModel`s expose UI state as `StateFlow`, creating a reactive data flow from the domain layer to the UI.
+    *   Handles all user interactions and observes data streams from the domain layer.
 
-## Technologies Used
+*   **Domain Layer:**
+    *   Contains the core business logic of the application.
+    *   Encapsulates logic within **UseCases** (e.g., `SearchTracksUseCase`, `AddTrackToFavoritesUseCase`).
+    *   Defines **"Clean" Models** (`Track`, `Album`, `Artist`) that are independent of the data layer's implementation details. This was a key architectural improvement to decouple the business logic from data sources.
+    *   The `Repository` interface is also defined here, following the Dependency Inversion Principle.
 
-*   **Kotlin:** The programming language used for the application.
-*   **Jetpack Compose:** For building the user interface.
-*   **Koin:** For dependency injection.
-*   **Retrofit:** For making network requests to the Deezer API.
-*   **Room:** For local database storage of favorite tracks.
-*   **Coil:** For loading images.
-*   **Jetpack Navigation for Compose:** For navigating between screens.
+*   **Data Layer:**
+    *   Implements the `Repository` interface from the domain layer.
+    *   Responsible for abstracting data sources.
+    *   Uses **Retrofit** to fetch data from the remote Deezer API.
+    *   Uses **Room** to provide a local database for persisting favorite tracks.
+    *   Contains **Mappers** to convert data transfer objects (DTOs) and database entities into the clean domain models.
+
+## Key Technologies & Libraries
+
+*   **UI:**
+    *   [Jetpack Compose](https://developer.android.com/jetpack/compose): For building a modern, declarative UI.
+    *   [Navigation for Compose](https://developer.android.com/jetpack/compose/navigation): For handling navigation between screens.
+    *   [Coil](https://coil-kt.github.io/coil/): For efficient image loading.
+
+*   **Architecture & Async:**
+    *   [Kotlin Coroutines & Flow](https://kotlinlang.org/docs/coroutines-guide.html): For managing asynchronous operations and creating reactive data streams.
+    *   [Koin](https://insert-koin.io/): For dependency injection, used to provide dependencies across all layers.
+
+*   **Data:**
+    *   [Retrofit](https://square.github.io/retrofit/): For type-safe HTTP requests to the Deezer API.
+    *   [Room](https://developer.android.com/training/data-storage/room): For robust, local database persistence.
+    *   [Kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization): For parsing JSON data from the API.
+
+## System Requirements
+
+*   **Minimum Android Version:** Android 5.0 (Lollipop), API 21

@@ -3,7 +3,7 @@ package com.example.musicapp.presentation.trackdetail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.musicapp.data.network.dto.TrackDto
+import com.example.musicapp.domain.model.Track
 import com.example.musicapp.domain.usecase.GetTrackDetailUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 sealed interface TrackDetailUiState {
     object Loading : TrackDetailUiState
-    data class Success(val track: TrackDto) : TrackDetailUiState
+    data class Success(val track: Track) : TrackDetailUiState
     data class Error(val message: String) : TrackDetailUiState
 }
 

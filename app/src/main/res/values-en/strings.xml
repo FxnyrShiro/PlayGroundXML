@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello_world">Hello world!</string>
+
+    <!-- Track Detail Screen -->
+    <string name="track_details_title">Track Details</string>
+    <string name="back_button_desc">Back</string>
+    <string name="album_cover_desc">Album Cover</string>
+    <string name="unknown_artist">Unknown Artist</string>
+    <string name="details_duration">Duration</string>
+    <string name="details_release_date">Released</string>
+    <string name="details_album">Album</string>
+    <string name="details_explicit">Explicit</string>
+    <string name="share_button_desc">Share Track</string>
+
+    <!-- Search Screen -->
+    <string name="search_placeholder">Search for a track...</string>
+    <string name="search_icon_desc">Search</string>
+    <string name="search_idle_text">Start your search</string>
+    <string name="toggle_favorite_desc">Toggle Favorite</string>
+
+    <!-- Favorites Screen -->
+    <string name="favorites_title">Favorites</string>
+    <string name="favorites_empty_state">"You haven't added any tracks to favorites yet."</string>
 </resources>

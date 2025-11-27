@@ -19,4 +19,8 @@
     <string name="search_idle_text">Start your search</string>
     <string name="toggle_favorite_desc">Toggle Favorite</string>
 
+    <!-- Favorites Screen -->
+    <string name="favorites_title">Favorites</string>
+    <string name="favorites_empty_state">"You haven't added any tracks to favorites yet."</string>
+
 </resources>
