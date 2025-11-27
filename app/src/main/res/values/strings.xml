@@ -16,7 +16,7 @@
     <string name="share_button_desc">Поделиться треком</string>
 
     <!-- Экран поиска -->
-    <string name="search_placeholder">Поиск трека...</string>
+    <string name="search_placeholder">Исполнитель, альбом или трек</string>
     <string name="search_icon_desc">Поиск</string>
     <string name="search_idle_text">Начните поиск, чтобы увидеть результаты</string>
     <string name="toggle_favorite_desc">Добавить или убрать из избранного</string>

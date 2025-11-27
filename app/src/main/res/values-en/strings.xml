@@ -14,7 +14,7 @@
     <string name="share_button_desc">Share Track</string>
 
     <!-- Search Screen -->
-    <string name="search_placeholder">Search for a track...</string>
+    <string name="search_placeholder">Artist, album, or track</string>
     <string name="search_icon_desc">Search</string>
     <string name="search_idle_text">Start your search</string>
     <string name="toggle_favorite_desc">Toggle Favorite</string>
