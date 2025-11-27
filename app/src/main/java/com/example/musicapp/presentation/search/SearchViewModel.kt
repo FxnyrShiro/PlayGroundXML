@@ -18,7 +18,7 @@ class SearchViewModel(
     private val searchTracksUseCase: SearchTracksUseCase,
     private val addTrackToFavoritesUseCase: AddTrackToFavoritesUseCase,
     private val removeTrackFromFavoritesUseCase: RemoveTrackFromFavoritesUseCase,
-    getFavoriteTracksUseCase: GetFavoriteTracksUseCase // Renamed to avoid conflict
+    getFavoriteTracksUseCase: GetFavoriteTracksUseCase
 ) : ViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
@@ -31,19 +31,34 @@ class SearchViewModel(
         .map { list -> list.map { it.id }.toSet() }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptySet())
 
+    init {
+        observeSearchQuery()
+    }
+
     fun onSearchQueryChange(query: String) {
         _searchQuery.value = query
     }
 
-    fun searchTracks() {
+    private fun observeSearchQuery() {
         viewModelScope.launch {
-            if (_searchQuery.value.isBlank()) {
-                _uiState.value = SearchUiState.Success(emptyList())
-                return@launch
-            }
+            searchQuery
+                .debounce(500) // Wait for 500ms of silence
+                .distinctUntilChanged() // Only search if the query is new
+                .collect { query ->
+                    if (query.isBlank()) {
+                        _uiState.value = SearchUiState.Idle
+                    } else {
+                        searchTracks(query)
+                    }
+                }
+        }
+    }
+
+    private fun searchTracks(query: String) {
+        viewModelScope.launch {
             _uiState.value = SearchUiState.Loading
             try {
-                val tracks = searchTracksUseCase(_searchQuery.value)
+                val tracks = searchTracksUseCase(query)
                 _uiState.value = SearchUiState.Success(tracks)
             } catch (e: Exception) {
                 _uiState.value = SearchUiState.Error(e.message ?: "An unknown error occurred")

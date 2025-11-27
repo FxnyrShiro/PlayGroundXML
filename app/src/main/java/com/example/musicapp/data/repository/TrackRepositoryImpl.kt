@@ -2,13 +2,13 @@ package com.example.musicapp.data.repository
 
 import com.example.musicapp.data.database.dao.TrackDao
 import com.example.musicapp.data.database.entity.TrackEntity
-import com.example.musicapp.data.network.ApiService
+import com.example.musicapp.data.network.DeezerApiService
 import com.example.musicapp.data.network.dto.TrackDto
 import com.example.musicapp.domain.repository.TrackRepository
 import kotlinx.coroutines.flow.Flow
 
 class TrackRepositoryImpl(
-    private val apiService: ApiService,
+    private val apiService: DeezerApiService,
     private val trackDao: TrackDao
 ) : TrackRepository {
 
@@ -17,6 +17,7 @@ class TrackRepositoryImpl(
     }
 
     override suspend fun getTrack(trackId: Long): TrackDto {
+        // This should ideally return a domain model, not a DTO
         return apiService.getTrack(trackId)
     }
 

@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -40,12 +39,7 @@ fun SearchScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
-                singleLine = true,
-                trailingIcon = {
-                    IconButton(onClick = { viewModel.searchTracks() }) {
-                        Icon(imageVector = Icons.Default.Search, contentDescription = stringResource(id = R.string.search_icon_desc))
-                    }
-                }
+                singleLine = true
             )
         }
     ) { padding ->

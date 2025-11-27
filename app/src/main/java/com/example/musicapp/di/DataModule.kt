@@ -2,7 +2,7 @@ package com.example.musicapp.di
 
 import androidx.room.Room
 import com.example.musicapp.data.database.AppDatabase
-import com.example.musicapp.data.network.ApiService
+import com.example.musicapp.data.network.DeezerApiService
 import com.example.musicapp.data.repository.TrackRepositoryImpl
 import com.example.musicapp.domain.repository.TrackRepository
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -10,19 +10,35 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val dataModule = module {
 
+    // Database
+    single {
+        Room.databaseBuilder(
+            androidContext(),
+            AppDatabase::class.java,
+            "music_app_database"
+        )
+        .fallbackToDestructiveMigration()
+        .build()
+    }
+
+    single { get<AppDatabase>().trackDao() }
+
     // Network
     single {
-        val logging = HttpLoggingInterceptor().apply {
+        HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
+    }
+
+    single {
         OkHttpClient.Builder()
-            .addInterceptor(logging)
+            .addInterceptor(get<HttpLoggingInterceptor>())
             .build()
     }
 
@@ -35,23 +51,11 @@ val dataModule = module {
             .build()
     }
 
-    single<ApiService> {
-        get<Retrofit>().create(ApiService::class.java)
+    single<DeezerApiService> {
+        get<Retrofit>().create(DeezerApiService::class.java)
     }
 
-    // Database
-    single {
-        Room.databaseBuilder(
-            androidApplication(),
-            AppDatabase::class.java,
-            "music_app_database"
-        ).build()
-    }
-
-    single {
-        get<AppDatabase>().trackDao()
-    }
-
-    // Repositories
+    // Repository
     single<TrackRepository> { TrackRepositoryImpl(get(), get()) }
+
 }

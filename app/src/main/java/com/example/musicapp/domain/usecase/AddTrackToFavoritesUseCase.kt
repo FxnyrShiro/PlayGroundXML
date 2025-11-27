@@ -11,6 +11,7 @@ class AddTrackToFavoritesUseCase(private val trackRepository: TrackRepository) {
             title = track.title,
             artistName = track.artist?.name ?: "Unknown Artist",
             albumCover = track.album?.coverMedium ?: "",
+            albumTitle = track.album?.title ?: "",
             previewUrl = track.preview ?: ""
         )
         trackRepository.addTrackToFavorites(trackEntity)

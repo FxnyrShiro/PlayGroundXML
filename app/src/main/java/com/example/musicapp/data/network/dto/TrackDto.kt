@@ -5,12 +5,16 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class TrackDto(
-    @SerialName("id") val id: Long,
-    @SerialName("title") val title: String,
-    @SerialName("preview") val preview: String? = null,
-    @SerialName("artist") val artist: ArtistDto? = null,
-    @SerialName("album") val album: AlbumDto? = null,
-    @SerialName("release_date") val releaseDate: String? = null,
-    @SerialName("duration") val duration: Int? = null,
-    @SerialName("explicit_lyrics") val explicitLyrics: Boolean? = null
+    val id: Long,
+    val title: String,
+    @SerialName("title_short") val titleShort: String? = null,
+    @SerialName("title_version") val titleVersion: String? = null,
+    val link: String? = null,
+    val duration: Int? = null,
+    val rank: Int? = null,
+    @SerialName("explicit_lyrics") val explicitLyrics: Boolean? = null,
+    val preview: String? = null,
+    val artist: ArtistDto? = null,
+    val album: AlbumDto? = null,
+    val releaseDate: String? = null // This field is not in the JSON, but might be useful later
 )

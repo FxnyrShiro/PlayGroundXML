@@ -9,15 +9,15 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TrackDao {
+    @Query("SELECT * FROM favorite_tracks")
+    fun getAllTracks(): Flow<List<TrackEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTrack(track: TrackEntity)
 
-    @Query("DELETE FROM tracks WHERE id = :trackId")
+    @Query("DELETE FROM favorite_tracks WHERE id = :trackId")
     suspend fun deleteTrack(trackId: Long)
 
-    @Query("SELECT * FROM tracks")
-    fun getAllTracks(): Flow<List<TrackEntity>>
-
-    @Query("SELECT EXISTS(SELECT 1 FROM tracks WHERE id = :trackId LIMIT 1)")
+    @Query("SELECT EXISTS(SELECT 1 FROM favorite_tracks WHERE id = :trackId)")
     fun isFavorite(trackId: Long): Flow<Boolean>
 }

@@ -80,7 +80,7 @@ private fun TrackEntity.toDto(): TrackDto {
         id = this.id,
         title = this.title,
         artist = ArtistDto(id = 0, name = this.artistName),
-        album = AlbumDto(id = 0, coverMedium = this.albumCover),
+        album = AlbumDto(id = 0, title = this.albumTitle, coverMedium = this.albumCover),
         preview = this.previewUrl
     )
 }

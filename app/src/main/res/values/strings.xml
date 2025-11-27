@@ -11,6 +11,7 @@
     <string name="details_release_date">Released</string>
     <string name="details_album">Album</string>
     <string name="details_explicit">Explicit</string>
+    <string name="share_button_desc">Share Track</string>
 
     <!-- Search Screen -->
     <string name="search_placeholder">Search for a track...</string>
