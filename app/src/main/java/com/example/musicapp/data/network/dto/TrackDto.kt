@@ -16,5 +16,5 @@ data class TrackDto(
     val preview: String? = null,
     val artist: ArtistDto? = null,
     val album: AlbumDto? = null,
-    val releaseDate: String? = null // This field is not in the JSON, but might be useful later
+    val releaseDate: String? = null
 )
