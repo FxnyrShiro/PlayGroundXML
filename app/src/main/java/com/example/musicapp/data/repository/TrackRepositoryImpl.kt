@@ -59,20 +59,20 @@ class TrackRepositoryImpl(
             title = this.title,
             preview = this.previewUrl,
             artist = Artist(
-                id = 0, // Not available in entity
+                id = 0,
                 name = this.artistName,
                 picture = null,
                 pictureMedium = null
             ),
             album = Album(
-                id = 0, // Not available in entity
+                id = 0,
                 title = this.albumTitle,
                 cover = this.albumCover,
                 coverMedium = this.albumCover
             ),
-            releaseDate = null, // Not available in entity
-            duration = null, // Not available in entity
-            explicitLyrics = null // Not available in entity
+            releaseDate = null,
+            duration = null,
+            explicitLyrics = null
         )
     }
 }

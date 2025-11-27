@@ -91,7 +91,7 @@ private fun FavoritesList(
         items(tracks, key = { it.id }) { track ->
             TrackListItem(
                 track = track,
-                isFavorite = true, // All tracks here are favorites
+                isFavorite = true,
                 onFavoriteClick = { onRemoveClick(track.id) },
                 onItemClick = { onTrackClick(track.id) }
             )
